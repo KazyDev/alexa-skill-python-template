@@ -1,0 +1,30 @@
+{
+  "manifest": {
+    "publishingInformation": {
+      "locales": {
+        "ja-JP": {
+          "name": "Name",
+          "summary": "Summary",
+          "examplePhrases": [
+            "Example 1",
+            "Example 2"
+          ],
+          "keywords": [
+            "Keyword 1",
+            "Keyword 2"
+          ],
+          "description": "Desctiption"
+        }
+      }
+    },
+    "apis": {
+      "custom": {
+        "endpoint": {
+          "sourceDir": "lambda/py",
+          "uri": "ask-custom-skill-name"
+        }
+      }
+    },
+    "manifestVersion": "1.0"
+  }
+}
