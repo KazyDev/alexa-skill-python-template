@@ -51,8 +51,14 @@ if [[ $TARGET == "all" || $TARGET == "lambda" ]]; then
         echo "Copying dependencies installed in $SKILL_NAME/.venv/$SKILL_ENV_NAME to $SKILL_NAME/$UPLOAD_DIR"
         SITE=$(.venv/$SKILL_ENV_NAME/bin/python -c 'from distutils.sysconfig import get_python_lib; print(get_python_lib())')
         cp -r $SITE/* $UPLOAD_DIR
+
+        # Step 4.1: Remove PIP and setuptools to reduce the total size
+        rm -rf $UPLOAD_DIR/pip
+        rm -rf $UPLOAD_DIR/pip-*
+        rm -rf $UPLOAD_DIR/setuptools
+        rm -rf $UPLOAD_DIR/setuptools-*
  
-        # Step 4: Update the "manifest.apis.custom.endpoint.sourceDir" value in skill.json if necessary
+        # Step 5: Update the "manifest.apis.custom.endpoint.sourceDir" value in skill.json if necessary
         if ! [[ $SOURCE_DIR == */lambda_upload ]]; then
             echo "Updating sourceDir to point to lambda_upload folder in skill.json"
             RAW_SOURCE_DIR_LINE="\"sourceDir\": \"$SOURCE_DIR\""
